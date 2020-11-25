@@ -1,0 +1,159 @@
+name: recipe_app
+description: A recipe app copy
+
+publish_to: 'none'
+
+version: 1.1.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^0.1.3
+  localstorage: ^3.0.3+6
+  dotted_border: ^1.0.6
+  provider: ^4.3.2+2
+  file: ^5.2.1
+  flutter_image: ^3.0.0
+  mongo_dart: ^0.4.4
+  crypto: ^2.1.5
+  flushbar: ^1.10.4
+  async: ^2.4.2
+  flutter_localizations:
+    sdk: flutter
+  speech_to_text: ^2.7.0
+  speech_recognition:
+    git:
+      url: https://github.com/webeverde/speech_recognition.git
+      ref: master
+  highlight_text: ^0.7.2
+  avatar_glow: ^1.2.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/data/ingredient.json
+    - assets/data/recipe.json
+    - assets/상세창/
+    - assets/ingredients/가지.png
+    - assets/ingredients/간장.png
+    - assets/ingredients/갈치.png
+    - assets/ingredients/감자.png
+    - assets/ingredients/게.png
+    - assets/ingredients/게맛살.png
+    - assets/ingredients/게살.png
+    - assets/ingredients/계란.png
+    - assets/ingredients/계피.png
+    - assets/ingredients/고구마.png
+    - assets/ingredients/고등어.png
+    - assets/ingredients/고사리.png
+    - assets/ingredients/고추.png
+    - assets/ingredients/고추장.png
+    - assets/ingredients/고춧가루.png
+    - assets/ingredients/골뱅이.png
+    - assets/ingredients/광어.png
+    - assets/ingredients/굴.png
+    - assets/ingredients/김치.png
+    - assets/ingredients/깍두기.png
+    - assets/ingredients/깻잎.png
+    - assets/ingredients/꽁치.png
+    - assets/ingredients/꽃게.png
+    - assets/ingredients/꿀.png
+    - assets/ingredients/낙지.png
+    - assets/ingredients/느타리버섯.png
+    - assets/ingredients/다시마.png
+    - assets/ingredients/단무지.png
+    - assets/ingredients/닭가슴살.png
+    - assets/ingredients/닭고기.png
+    - assets/ingredients/대구.png
+    - assets/ingredients/돼지고기.png
+    - assets/ingredients/두부.png
+    - assets/ingredients/딸기.png
+    - assets/ingredients/라면.png
+    - assets/ingredients/라이스페이퍼.png
+    - assets/ingredients/라임.png
+    - assets/ingredients/레몬.png
+    - assets/ingredients/마늘.png
+    - assets/ingredients/머스타드.png
+    - assets/ingredients/무말랭이.png
+    - assets/ingredients/무우.png
+    - assets/ingredients/문어.png
+    - assets/ingredients/미나리.png
+    - assets/ingredients/미역.png
+    - assets/ingredients/바질.png
+    - assets/ingredients/밥.png
+    - assets/ingredients/배추.png
+    - assets/ingredients/버섯.png
+    - assets/ingredients/버터.png
+    - assets/ingredients/베이컨.png
+    - assets/ingredients/부추.png
+    - assets/ingredients/브로콜리.png
+    - assets/ingredients/사과.png
+    - assets/ingredients/새우.png
+    - assets/ingredients/새우젓.png
+    - assets/ingredients/생강.png
+    - assets/ingredients/소고기.png
+    - assets/ingredients/소시지.png
+    - assets/ingredients/소주.png
+    - assets/ingredients/송어.png
+    - assets/ingredients/순대.png
+    - assets/ingredients/스위트콘.png
+    - assets/ingredients/스파게티면.png
+    - assets/ingredients/시금치.png
+    - assets/ingredients/쌀.png
+    - assets/ingredients/아보카도.png
+    - assets/ingredients/양배추.png
+    - assets/ingredients/양상추.png
+    - assets/ingredients/양송이.png
+    - assets/ingredients/양파.png
+    - assets/ingredients/연어.png
+    - assets/ingredients/오렌지.png
+    - assets/ingredients/오이.png
+    - assets/ingredients/오이소박이.png
+    - assets/ingredients/오징어.png
+    - assets/ingredients/옥수수.png
+    - assets/ingredients/와사비.png
+    - assets/ingredients/완두콩.png
+    - assets/ingredients/우동면.png
+    - assets/ingredients/전복.png
+    - assets/ingredients/조개.png
+    - assets/ingredients/쭈꾸미.png
+    - assets/ingredients/참치.png
+    - assets/ingredients/체리.png
+    - assets/ingredients/치즈.png
+    - assets/ingredients/케첩.png
+    - assets/ingredients/콩.png
+    - assets/ingredients/콩나물.png
+    - assets/ingredients/키위.png
+    - assets/ingredients/파.png
+    - assets/ingredients/파스타.png
+    - assets/ingredients/파슬리.png
+    - assets/ingredients/파인애플.png
+    - assets/ingredients/파전.png
+    - assets/ingredients/파프리카.png
+    - assets/ingredients/포도.png
+    - assets/ingredients/피클.png
+    - assets/ingredients/해삼.png
+    - assets/ingredients/햄.png
+    - assets/ingredients/홍합.png
+
+
+
+
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
