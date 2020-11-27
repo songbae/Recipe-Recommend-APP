@@ -42,32 +42,33 @@ class _ChangeDateState extends State<ChangeDate> {
   syncFromDB() async {
     return this._memoizer.runOnce(() async {
       await db.open();
-      await collection.find({'id': _id}).forEach((element) async {
-        if (element['expiry'] == null) {
-          ing.forEach((_ing) {
-            expiry[_ing] = DateTime.now().toString();
-          });
-          await collection.update({
-            'id': _id
-          }, {
-            'id': _id,
-            'expiry': jsonEncode(expiry),
-          });
-        } else {
-          ing.forEach((_ing) {
-            expiry[_ing] = jsonDecode(element['expiry'])[_ing] ??
-                DateTime.now().toString();
-          });
-          await collection.update({
-            'id': _id
-          }, {
-            'id': _id,
-            'expiry': jsonEncode(expiry),
-          });
-        }
-      });
-      await db.close();
-      await Future.delayed(Duration(seconds: 1));
+      // collection에 id가 없는경우
+      if (await collection.findOne({'id': _id}) == null) {
+        ing.forEach((_ing) {
+          expiry[_ing] = DateTime.now().toString();
+        });
+        await collection.insert({
+          'id': _id,
+          'expiry': jsonEncode(expiry),
+        });
+      } else {
+        await collection.find({'id': _id}).forEach((element) async {
+          if (element['expiry'] != null) {
+            ing.forEach((_ing) {
+              expiry[_ing] = jsonDecode(element['expiry'])[_ing] ??
+                  DateTime.now().toString();
+            });
+            await collection.update({
+              'id': _id
+            }, {
+              'id': _id,
+              'expiry': jsonEncode(expiry),
+            });
+          }
+        });
+        await db.close();
+        await Future.delayed(Duration(seconds: 1));
+      }
       return expiry;
     });
   }
@@ -129,17 +130,6 @@ class _ChangeDateState extends State<ChangeDate> {
               Navigator.pop(context);
             },
           ),
-          actions: [
-            IconButton(
-              icon: Icon(
-                Icons.update,
-                color: Colors.black54,
-              ),
-              onPressed: () {
-                print(expiry);
-              },
-            )
-          ],
         ),
       ),
       body: FutureBuilder(

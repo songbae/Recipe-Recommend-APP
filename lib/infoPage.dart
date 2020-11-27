@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:recipe_app/amendingIng.dart';
 import 'package:recipe_app/changeDate.dart';
+import 'package:recipe_app/whatIwritten.dart';
 import 'package:recipe_app/write.dart';
 
 class InfoPage extends StatefulWidget {
@@ -85,15 +85,15 @@ class _InfoPageState extends State<InfoPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "아이디: ${parsedInfo['id']}",
+                                "ID: ${parsedInfo['id']}",
                                 style: TextStyle(
-                                  fontSize: 15.0,
+                                  fontSize: 20.0,
                                 ),
                               ),
                               Text(
-                                "식재료: ${parsedInfo['userFavor']}",
+                                "내 냉장고속 재료: ${parsedInfo['userFavor']}",
                                 style: TextStyle(
-                                  fontSize: 15.0,
+                                  fontSize: 20.0,
                                 ),
                               )
                             ],
@@ -107,7 +107,6 @@ class _InfoPageState extends State<InfoPage> {
                         color: Colors.black54,
                       ),
                       MaterialButton(
-
                         padding: EdgeInsets.all(0),
                         child: Text("식재료 추가 / 삭제"),
                         onPressed: () {
@@ -130,7 +129,12 @@ class _InfoPageState extends State<InfoPage> {
                         padding: EdgeInsets.all(0),
                         child: Text("내가 쓴 글"),
                         onPressed: () {
-                          Navigator.pushNamed(context, Write.id);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => WhatIWritten(),
+                            ),
+                          );
                         },
                       ),
                       MaterialButton(

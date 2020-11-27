@@ -85,6 +85,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       onChanged: (val) {
                         setState(() {
                           ingredientListForAdd.add(val);
+                          ingredientListForAdd = ingredientListForAdd.toSet().toList();
                         });
                       },
                       items: ['선택해주세요 (더블클릭시 삭제)', ...snapshot.data]

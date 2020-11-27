@@ -21,13 +21,14 @@ dependencies:
   crypto: ^2.1.5
   flushbar: ^1.10.4
   async: ^2.4.2
+  path_provider: ^1.6.24
+  flutter_absolute_path: ^1.0.6
+  flutter_image_compress: ^0.7.0
+  file_picker: ^2.1.0
+  path: any
   flutter_localizations:
     sdk: flutter
   speech_to_text: ^2.7.0
-  speech_recognition:
-    git:
-      url: https://github.com/webeverde/speech_recognition.git
-      ref: master
   highlight_text: ^0.7.2
   avatar_glow: ^1.2.0
 
