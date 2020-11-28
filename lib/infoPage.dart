@@ -5,7 +5,6 @@ import 'package:localstorage/localstorage.dart';
 import 'package:recipe_app/amendingIng.dart';
 import 'package:recipe_app/changeDate.dart';
 import 'package:recipe_app/whatIwritten.dart';
-import 'package:recipe_app/write.dart';
 
 class InfoPage extends StatefulWidget {
   static const id = 'info_page';

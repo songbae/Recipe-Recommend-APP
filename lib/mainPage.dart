@@ -6,10 +6,13 @@ import 'package:file/local.dart';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
+import 'package:recipe_app/amendingIng.dart';
+import 'package:recipe_app/changeDate.dart';
 import 'package:recipe_app/infoPage.dart';
 import 'package:recipe_app/more.dart';
 import 'package:recipe_app/searchResult.dart';
 import 'package:recipe_app/recipePage.dart';
+import 'package:recipe_app/whatIwritten.dart';
 import 'package:recipe_app/write.dart';
 import 'package:recipe_app/individualRecipe.dart';
 import 'package:avatar_glow/avatar_glow.dart';
@@ -72,6 +75,8 @@ class _MainPageState extends State<MainPage> {
   bool _isListening = false;
   bool _willUseSpeechRecognize = false;
 
+  Map<String, dynamic> parsedInfo;
+
   @override
   void initState() {
     _storage = LocalStorage('login_info');
@@ -88,6 +93,15 @@ class _MainPageState extends State<MainPage> {
     collection = db.collection('users');
     collection2 = db.collection('recipe');
     _recipeAndImgListAfterFetch = fetchRecipeAndImgList();
+    parsedInfo =
+    Map<String, dynamic>.from(jsonDecode(_storage.getItem('info')));
+  }
+
+  refreshInfo() async {
+    setState(() {
+      parsedInfo =
+          Map<String, dynamic>.from(jsonDecode(_storage.getItem('info')));
+    });
   }
 
   refreshState() async {
@@ -104,10 +118,9 @@ class _MainPageState extends State<MainPage> {
         await collection.update({
           "id": _localStorage["id"]
         }, {
-          "id": _localStorage["id"],
-          "ingList": jsonEncode(_localStorage["userFavor"]),
-          "password": _localStorage['passwd'],
-          "recipeCnt": 0,
+          "\$set": {
+            "recipeCnt": 0,
+          }
         });
       }
     });
@@ -183,10 +196,10 @@ class _MainPageState extends State<MainPage> {
         _speech.listen(
           onResult: (val) => setState(
             () {
-              if(_isVisible) {
+              if (_isVisible) {
                 _controller.text = val.recognizedWords;
                 searchItem = val.recognizedWords;
-              } else if(!_isVisible) {
+              } else if (!_isVisible) {
                 _controller2.text = val.recognizedWords;
                 searchParam = val.recognizedWords;
               }
@@ -206,6 +219,108 @@ class _MainPageState extends State<MainPage> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
+        endDrawerEnableOpenDragGesture: false,
+        endDrawer: Builder(
+          builder: (context) {
+            return Drawer(
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: <Widget>[
+                  DrawerHeader(
+                    child: Column(
+                      children: [
+                        Text(
+                          '로그인 정보',
+                          style: TextStyle(
+                            fontSize: 18.0,
+                          ),
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width - 30,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 10.0,
+                              horizontal: 30.0,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "ID: ${parsedInfo['id']}",
+                                  style: TextStyle(
+                                    fontSize: 20.0,
+                                  ),
+                                ),
+                                Text(
+                                  "내 냉장고속 재료: ${parsedInfo['userFavor']}",
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: 20.0,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white24,
+                    ),
+                  ),
+                  ListTile(
+                    title: Text("재료 추가 / 삭제"),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AmendingIng(),
+                        ),
+                      ).then((value) => refreshInfo());
+                    },
+                  ),
+                  ListTile(
+                    title: Text("유통기한 확인"),
+                    onTap: () {
+                      Navigator.pushNamed(context, ChangeDate.id);
+                    },
+                  ),
+                  ListTile(
+                    title: Text("내가 쓴 글"),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => WhatIWritten(),
+                        ),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    title: Text("로그아웃"),
+                    onTap: () {
+                      _storage.deleteItem('info');
+                      Scaffold.of(context)
+                          .showSnackBar(
+                            SnackBar(
+                              duration: Duration(
+                                seconds: 2,
+                              ),
+                              content: Text('로그아웃...'),
+                            ),
+                          )
+                          .closed
+                          .then((_) {
+                        Navigator.of(context)
+                            .popUntil((route) => route.isFirst);
+                      });
+                    },
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
         floatingActionButton: AnimatedOpacity(
           opacity: _willUseSpeechRecognize ? 1.0 : 0.0,
           duration: Duration(milliseconds: 500),
@@ -299,6 +414,21 @@ class _MainPageState extends State<MainPage> {
                     child: Icon(
                       Icons.person_outline,
                       color: Colors.black45,
+                    ),
+                  ),
+                ),
+                Builder(
+                  builder: (context) => Container(
+                    width: 30.0,
+                    child: MaterialButton(
+                      padding: EdgeInsets.all(0),
+                      onPressed: () {
+                        Scaffold.of(context).openEndDrawer();
+                      },
+                      child: Icon(
+                        Icons.menu,
+                        color: Colors.black45,
+                      ),
                     ),
                   ),
                 ),

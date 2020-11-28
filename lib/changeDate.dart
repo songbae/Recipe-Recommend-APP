@@ -102,8 +102,9 @@ class _ChangeDateState extends State<ChangeDate> {
       await collection.update({
         'id': _id
       }, {
-        'id': _id,
-        'expiry': jsonEncode(expiry),
+        "\$set": {
+          'expiry': jsonEncode(expiry),
+        }
       });
       db.close();
     }

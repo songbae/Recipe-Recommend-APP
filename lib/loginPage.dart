@@ -90,8 +90,6 @@ class _LoginPage extends State<LoginPage> {
                             {
                               'id': id,
                               'userFavor': jsonDecode(v['ingList']),
-                              'passwd':
-                                  md5.convert(utf8.encode(passwd)).toString()
                             },
                           ),
                         );

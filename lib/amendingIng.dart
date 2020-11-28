@@ -4,7 +4,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:mongo_dart/mongo_dart.dart' as mongo;
-import 'package:recipe_app/infoPage.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
+import 'package:avatar_glow/avatar_glow.dart';
 
 class AmendingIng extends StatefulWidget {
   @override
@@ -17,6 +18,10 @@ class _AmendingIngState extends State<AmendingIng> {
   List<String> _ingList;
   List<String> _searchResult;
   String searchParam;
+
+  stt.SpeechToText _speech = stt.SpeechToText();
+  bool _isListening = false;
+  TextEditingController _controller = TextEditingController();
 
   @override
   void initState() {
@@ -36,11 +41,48 @@ class _AmendingIngState extends State<AmendingIng> {
     _searchResult = []..addAll(_ingList);
   }
 
+  void _listen() async {
+    if (!_isListening) {
+      bool available = await _speech.initialize(
+        onStatus: (val) => print('onStatus: $val'),
+        onError: (val) => print('onError: $val'),
+      );
+      if (available) {
+        setState(() => _isListening = true);
+        _speech.listen(
+          onResult: (val) => setState(
+            () {
+              _controller.text = val.recognizedWords;
+              searchParam = val.recognizedWords;
+            },
+          ),
+        );
+      }
+    } else {
+      setState(() => _isListening = false);
+      _speech.stop();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
+        floatingActionButton: AvatarGlow(
+          animate: _isListening,
+          glowColor: Theme.of(context).primaryColor,
+          endRadius: 75.0,
+          duration: Duration(milliseconds: 2000),
+          repeatPauseDuration: Duration(milliseconds: 100),
+          repeat: true,
+          child: FloatingActionButton(
+            onPressed: () async {
+              _listen();
+            },
+            child: Icon(_isListening ? Icons.mic : Icons.mic_none),
+          ),
+        ),
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(40.0),
           child: AppBar(
@@ -58,14 +100,11 @@ class _AmendingIngState extends State<AmendingIng> {
                 ),
                 onPressed: () async {
                   final id = jsonDecode(storage.getItem('info'))['id'];
-                  final passwd =
-                      jsonDecode(storage.getItem('info'))['passwd'];
                   storage.setItem(
                       'info',
                       jsonEncode({
                         "id": id,
                         "userFavor": currentIngList,
-                        "passwd": passwd,
                       }));
                   final db = mongo.Db('mongodb://songbae:dotslab1234@'
                       'cluster0-shard-00-00.isb9a.mongodb.net:27017,'
@@ -79,12 +118,9 @@ class _AmendingIngState extends State<AmendingIng> {
                   await collection.update({
                     'id': id
                   }, {
-                    'id': id,
-                    'ingList': jsonEncode(currentIngList),
-                    'password': passwd,
+                    '\$set': {'ingList': jsonEncode(currentIngList)}
                   });
                   Navigator.pop(context);
-                  Navigator.popAndPushNamed(context, InfoPage.id);
                 },
               ),
             ],
@@ -144,6 +180,7 @@ class _AmendingIngState extends State<AmendingIng> {
                 Padding(
                   padding: EdgeInsets.all(10.0),
                   child: TextField(
+                    controller: _controller,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white,

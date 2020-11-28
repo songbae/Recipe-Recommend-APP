@@ -82,79 +82,82 @@ class _WriteState extends State<Write> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          automaticallyImplyLeading: false,
-          actions: [
-            IconButton(
-              padding: EdgeInsets.all(0),
-              onPressed: () {
-                bucket.chunks.remove({"_id": "$id--main-$cnt"});
-                for (var i = 1; i <= recipeList.length; ++i) {
-                  bucket.chunks.remove({"_id": "$id--STEP$i-$cnt"});
-                }
-                Navigator.pop(context);
-              },
-              icon: Icon(
-                Icons.close,
-                color: Colors.black,
-              ),
-            ),
-            IconButton(
-              padding: EdgeInsets.all(0),
-              onPressed: () async {
-                if (provider != null &&
-                    name != null &&
-                    summary != null &&
-                    cal != null &&
-                    ingredients.isNotEmpty &&
-                    ingredients.length != 0) {
-                  await collection2.insert({
-                    "writer": id,
-                    "name": name,
-                    "summary": summary,
-                    "nation": nationVal,
-                    "qnt": servingVal,
-                    "cal": cal,
-                    "level": levelVal,
-                    "picture": "$id--main-$cnt",
-                    "category": categoryVal,
-                    "ingredients": jsonEncode(ingredients),
-                    "info": jsonEncode(
-                      [
-                        ...recipeList.map(
-                          (e) => {
-                            "content": info[e.stepNum - 1],
-                            "picture": e.provider != null
-                                ? "$id--STEP${e.stepNum}-$cnt"
-                                : ""
-                          },
-                        ),
-                      ],
-                    ),
-                    "likes": [],
-                  });
-                  await collection.update({
-                    "id": id
-                  }, {
-                    "\$set": {
-                      "recipeCnt": ++cnt,
-                    },
-                  });
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(45.0),
+          child: AppBar(
+            centerTitle: true,
+            automaticallyImplyLeading: false,
+            actions: [
+              IconButton(
+                padding: EdgeInsets.all(0),
+                onPressed: () {
+                  bucket.chunks.remove({"_id": "$id--main-$cnt"});
+                  for (var i = 1; i <= recipeList.length; ++i) {
+                    bucket.chunks.remove({"_id": "$id--STEP$i-$cnt"});
+                  }
                   Navigator.pop(context);
-                }
-              },
-              icon: Icon(
-                Icons.check,
-                color: Colors.black,
+                },
+                icon: Icon(
+                  Icons.close,
+                  color: Colors.black,
+                ),
               ),
+              IconButton(
+                padding: EdgeInsets.all(0),
+                onPressed: () async {
+                  if (provider != null &&
+                      name != null &&
+                      summary != null &&
+                      cal != null &&
+                      ingredients.isNotEmpty &&
+                      ingredients.length != 0) {
+                    await collection2.insert({
+                      "writer": id,
+                      "name": name,
+                      "summary": summary,
+                      "nation": nationVal,
+                      "qnt": servingVal,
+                      "cal": cal,
+                      "level": levelVal,
+                      "picture": "$id--main-$cnt",
+                      "category": categoryVal,
+                      "ingredients": jsonEncode(ingredients),
+                      "info": jsonEncode(
+                        [
+                          ...recipeList.map(
+                            (e) => {
+                              "content": info[e.stepNum - 1],
+                              "picture": e.provider != null
+                                  ? "$id--STEP${e.stepNum}-$cnt"
+                                  : ""
+                            },
+                          ),
+                        ],
+                      ),
+                      "likes": [],
+                    });
+                    await collection.update({
+                      "id": id
+                    }, {
+                      "\$set": {
+                        "recipeCnt": ++cnt,
+                      },
+                    });
+                    Navigator.pop(context);
+                  }
+                },
+                icon: Icon(
+                  Icons.check,
+                  color: Colors.black,
+                ),
+              ),
+            ],
+            backgroundColor: Colors.white,
+            elevation: 5.0,
+            title: Text(
+              '오늘뭐먹지?',
+              style: TextStyle(color: Colors.black45),
             ),
-          ],
-          backgroundColor: Colors.white,
-          elevation: 5.0,
-          title: Text(
-            '오늘뭐먹지?',
-            style: TextStyle(color: Colors.black45),
           ),
         ),
         body: SingleChildScrollView(
@@ -544,7 +547,6 @@ class __RecipeBoxState extends State<_RecipeBox> {
         children: [
           Container(
             width: MediaQuery.of(context).size.width,
-            height: 500,
             decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(
