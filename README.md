@@ -1,6 +1,9 @@
 # recipe_app
 
-A recipe app copy
+레시피 추천 앱 개발 
+
+flutter 
+mongodb
 
 ## Getting Started
 
