@@ -1,10 +1,22 @@
 # recipe_app
 
-레시피 추천 앱 개발 
+# 레시피 추천 앱 개발 
 
-flutter 
-mongodb
+## 로그인 기능 
 
+## 레시피 검색 기능 
+
+## 식재료 기반 레시피 추천 
+
+## 식재료 유통기한을 통해 알림기능 
+
+## 유저들의 새로운 레시피 추가기능 
+
+## 음성인식 기능(식재료 추가, 레시피 검색)
+
+### 개발환경 : Android Studio , flutter, dart, mongoDB
+
+# 
 ## Getting Started
 
 This project is a starting point for a Flutter application.
