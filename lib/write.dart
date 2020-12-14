@@ -19,7 +19,7 @@ class _WriteState extends State<Write> {
   LocalStorage _storage;
   LocalStorage _storage2;
   static List<_RecipeBox> recipeList = [];
-  String dropdownTitle = '선택해주세요 (더블클릭시 삭제)';
+  String dropdownTitle = '선택(더블클릭시 삭제)';
 
   // File _image;
   mongo.Db _db = mongo.Db('mongodb://songbae:dotslab1234@'

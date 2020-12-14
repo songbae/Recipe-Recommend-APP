@@ -14,7 +14,7 @@ class Data {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  String dropdownTitle = '선택해주세요 (더블클릭시 삭제)';
+  String dropdownTitle = '선택(삭제)';
   List<String> ingredientListForAdd = [];
   final _formKeyID = GlobalKey<FormState>();
   final _formKeyPWD = GlobalKey<FormState>();
@@ -88,7 +88,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           ingredientListForAdd = ingredientListForAdd.toSet().toList();
                         });
                       },
-                      items: ['선택해주세요 (더블클릭시 삭제)', ...snapshot.data]
+                      items: ['선택(더블클릭시 삭제)', ...snapshot.data]
                           .map<DropdownMenuItem<String>>(
                         (value) {
                           return DropdownMenuItem<String>(

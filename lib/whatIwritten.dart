@@ -75,7 +75,7 @@ class _WhatIWrittenState extends State<WhatIWritten> {
             Expanded(
               child: Center(
                 child: Text(
-                  "내가 쓴 글 목록",
+                  "내가 쓴 글",
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 18.0,

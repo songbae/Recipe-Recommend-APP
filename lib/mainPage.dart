@@ -252,7 +252,7 @@ class _MainPageState extends State<MainPage> {
                                   ),
                                 ),
                                 Text(
-                                  "내 냉장고속 재료: ${parsedInfo['userFavor']}",
+                                  " 내 식재료: ${parsedInfo['userFavor']}",
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                     fontSize: 20.0,
@@ -280,7 +280,7 @@ class _MainPageState extends State<MainPage> {
                     },
                   ),
                   ListTile(
-                    title: Text("유통기한 확인"),
+                    title: Text("유통기한"),
                     onTap: () {
                       Navigator.pushNamed(context, ChangeDate.id);
                     },
@@ -453,7 +453,7 @@ class _MainPageState extends State<MainPage> {
                           width: MediaQuery.of(context).size.width - 30,
                           height: 40.0,
                           decoration: BoxDecoration(
-                            color: Colors.pinkAccent,
+                            color: Colors.black,
                             borderRadius: BorderRadius.circular(
                               10.0,
                             ),
@@ -512,7 +512,7 @@ class _MainPageState extends State<MainPage> {
                             child: Container(
                               height: 30.0,
                               decoration: BoxDecoration(
-                                color: Colors.pinkAccent,
+                                color: Colors.black,
                                 borderRadius: BorderRadius.circular(
                                   5.0,
                                 ),
@@ -532,7 +532,7 @@ class _MainPageState extends State<MainPage> {
                                   setState(() {
                                     if (fs
                                         .file(
-                                            '/Users/babosangjamk4/workspace/외주/recipe-app/assets/ingredients/$searchItem.png')
+                                            'C:/recipe-app/recipe-app/assets/ingredients/$searchItem.png')
                                         .existsSync()) {
                                       materialList[searchItem] =
                                           'assets/ingredients/$searchItem.png';

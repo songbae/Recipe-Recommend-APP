@@ -90,7 +90,7 @@ class _InfoPageState extends State<InfoPage> {
                                 ),
                               ),
                               Text(
-                                "내 냉장고속 재료: ${parsedInfo['userFavor']}",
+                                "내 식재료: ${parsedInfo['userFavor']}",
                                 style: TextStyle(
                                   fontSize: 20.0,
                                 ),
