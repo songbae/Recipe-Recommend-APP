@@ -528,19 +528,10 @@ class _MainPageState extends State<MainPage> {
                                   ),
                                 ),
                                 onPressed: () async {
-                                  const fs = LocalFileSystem();
                                   setState(() {
-                                    if (fs
-                                        .file(
-                                            'C:/recipe-app/recipe-app/assets/ingredients/$searchItem.png')
-                                        .existsSync()) {
-                                      materialList[searchItem] =
-                                          'assets/ingredients/$searchItem.png';
-                                      ingredientExists[searchItem] = false;
-                                    } else {
                                       if (ingredientList.contains(searchItem)) {
                                         materialList[searchItem] =
-                                            'assets/dish.png';
+                                            'assets/ingredients/$searchItem.png';
                                         ingredientExists[searchItem] = true;
                                       } else {
                                         final alert = AlertDialog(
@@ -559,7 +550,7 @@ class _MainPageState extends State<MainPage> {
                                           builder: (_) => alert,
                                         );
                                       }
-                                    }
+
                                     _controller.clear();
                                     runEverytimeToMatch();
                                   });
@@ -603,10 +594,10 @@ class _MainPageState extends State<MainPage> {
                                                   Opacity(
                                                     opacity: 0.5,
                                                     child: Image.asset(
-                                                      'assets/dish.png',
-                                                      height: 80.0,
-                                                      color: Colors.black54,
-                                                    ),
+                                                  'assets/ingredients/$searchItem.png',
+                                                  height: 80.0,
+                                                  ),
+
                                                   ),
                                                   Positioned.fill(
                                                     child: Align(
@@ -945,7 +936,7 @@ class _MainPageState extends State<MainPage> {
                                           ),
                                           child: Center(
                                             child: Text(
-                                              "내 냉장고 재료 기반 검색",
+                                              " 추천레시피 ",
                                               style: TextStyle(
                                                   color: Colors.white),
                                             ),

@@ -67,7 +67,7 @@ class _InitPageState extends State<InitPage> {
                 width: _width,
                 height: 40.0,
                 decoration: BoxDecoration(
-                  color: Colors.pinkAccent,
+                  color: Colors.black,
                   borderRadius: BorderRadius.circular(
                     10.0,
                   ),
