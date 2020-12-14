@@ -41,11 +41,13 @@ class _ChangeDateState extends State<ChangeDate> {
 
   syncFromDB() async {
     return this._memoizer.runOnce(() async {
+      var dd= DateTime.now();
+      var dk= dd.add(Duration(days:7));
       await db.open();
-      // collection에 id가 없는경우
       if (await collection.findOne({'id': _id}) == null) {
+        // collection에 id가 없는경우
         ing.forEach((_ing) {
-          expiry[_ing] = DateTime.now().toString();
+          expiry[_ing] = dk.toString();
         });
         await collection.insert({
           'id': _id,
@@ -56,13 +58,27 @@ class _ChangeDateState extends State<ChangeDate> {
           if (element['expiry'] != null) {
             ing.forEach((_ing) {
               expiry[_ing] = jsonDecode(element['expiry'])[_ing] ??
-                  DateTime.now().toString();
+                  dk.toString();
             });
             await collection.update({
               'id': _id
             }, {
+              '\$set': {
+                'expiry': jsonEncode(expiry),
+              }
+            });
+          } else {
+            // element['expiry']가 null인 경우 새로 업데이트
+            ing.forEach((_ing) {
+              expiry[_ing] =dk.toString();
+            });
+            print(expiry);
+            await collection.update({
               'id': _id,
-              'expiry': jsonEncode(expiry),
+            }, {
+              '\$set': {
+                'expiry': jsonEncode(expiry),
+              }
             });
           }
         });
@@ -72,7 +88,6 @@ class _ChangeDateState extends State<ChangeDate> {
       return expiry;
     });
   }
-
   _selectDate(context, date, ingName) async {
     picked = await showDatePicker(
         context: context,
@@ -89,7 +104,7 @@ class _ChangeDateState extends State<ChangeDate> {
           return Theme(
             data: ThemeData.light().copyWith(
               primaryColor: Colors.black54,
-              accentColor: Colors.pinkAccent, //selection color
+              accentColor: Colors.black, //selection color
             ),
             child: child,
           );

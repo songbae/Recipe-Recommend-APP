@@ -5,6 +5,7 @@ import 'package:recipe_app/infoPage.dart';
 import 'package:recipe_app/initPage.dart';
 import 'package:recipe_app/mainPage.dart';
 import 'package:recipe_app/write.dart';
+import 'package:recipe_app/animatedStartingPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,13 +17,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       localizationsDelegates: [GlobalMaterialLocalizations.delegate],
       supportedLocales: [Locale('en'), Locale('kr')],
-      initialRoute: InitPage.id,
+      initialRoute: AnimatedStartingPage.id,
       routes: {
         InitPage.id: (context) => InitPage(),
         InfoPage.id: (context) => InfoPage(),
         MainPage.id: (context) => MainPage(),
         ChangeDate.id: (context) => ChangeDate(),
         Write.id: (context) => Write(),
+        AnimatedStartingPage.id: (context) => AnimatedStartingPage(),
       },
     );
   }
