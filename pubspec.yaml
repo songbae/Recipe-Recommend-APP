@@ -43,7 +43,7 @@ flutter:
     - assets/data/ingredient.json
     - assets/data/recipe.json
     - assets/상세창/
-    - ingredients/
+    - assets/ingredients/
 
 
 

@@ -528,6 +528,7 @@ class _MainPageState extends State<MainPage> {
                                   ),
                                 ),
                                 onPressed: () async {
+                                  const fs = LocalFileSystem();
                                   setState(() {
                                       if (ingredientList.contains(searchItem)) {
                                         materialList[searchItem] =
@@ -594,7 +595,10 @@ class _MainPageState extends State<MainPage> {
                                                   Opacity(
                                                     opacity: 0.5,
                                                     child: Image.asset(
-                                                  'assets/ingredients/$searchItem.png',
+                                                materialList[ingredientsName
+                                                [
+                                                  index
+                                                ]],
                                                   height: 80.0,
                                                   ),
 
