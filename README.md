@@ -17,7 +17,8 @@
 
  `개발환경 : Android Studio , flutter, dart, mongoDB`
 ---
-###<이미지> 
+### <이미지> 
+
 - 로그인
 
 ![image](https://user-images.githubusercontent.com/65913073/101260827-eeadc900-3775-11eb-8103-bdc381790f06.png)
@@ -33,8 +34,8 @@
 ![image](https://user-images.githubusercontent.com/65913073/101260844-0a18d400-3776-11eb-8141-49cda1354d8b.png)
 
 - 로그인 정보 
-![image](https://user-images.githubusercontent.com/65913073/101260851-1ac94a00-3776-11eb-972c-0e4639574055.png)
 
+![image](https://user-images.githubusercontent.com/65913073/101260851-1ac94a00-3776-11eb-972c-0e4639574055.png)
 ![image](https://user-images.githubusercontent.com/65913073/101260846-0f761e80-3776-11eb-9212-8cb05cf54259.png)
 
 - 레시피 검색/음성인식 
