@@ -22,7 +22,7 @@
 ### [이미지]
 
 - 로그인
-- 
+
 <img src = "https://user-images.githubusercontent.com/65913073/118404517-37b36300-b6ae-11eb-8c8d-927445725b82.png" width ="200" height="400"> <img src = "https://user-images.githubusercontent.com/65913073/101260827-eeadc900-3775-11eb-8103-bdc381790f06.png" width ="200" height="400">
 
 - 메인페이지
