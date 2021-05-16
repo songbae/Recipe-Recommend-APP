@@ -1,11 +1,9 @@
-.center {
-  display: block;
-  margin: auto;
-}
-## recipe_app
+
+
+# [오늘 뭐먹지?]
 ---
 
-## 레시피 추천 앱 개발 
+## [ 레시피 추천 앱 개발 ]
 
 - 로그인 기능 
 
@@ -21,7 +19,7 @@
 
  `개발환경 : Android Studio , flutter, dart, mongoDB`
 ---
-### <이미지> 
+### [이미지]
 
 - 로그인
 
