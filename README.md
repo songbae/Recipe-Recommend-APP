@@ -28,10 +28,50 @@
 -  음성인식 기능(식재료 추가, 레시피 검색)
 ---
 ### Dir 구조 
+```
+C:.
+├─android          ### flutter code를 Android 앱에 맞게 변환
+│  ├─app
+│  │  └─src
+│  │      ├─debug
+│  │      ├─main
+│  │      │  ├─kotlin
+│  │      │  │  └─co
+│  │      │  │      └─dotslab
+│  │      │  │          └─recipe_app
+│  │      │  └─res
+│  │      │      ├─drawable
+│  │      │      ├─mipmap-hdpi
+│  │      │      ├─mipmap-mdpi
+│  │      │      ├─mipmap-xhdpi
+│  │      │      ├─mipmap-xxhdpi
+│  │      │      ├─mipmap-xxxhdpi
+│  │      │      └─values
+│  │      └─profile
+│  └─gradle
+│      └─wrapper
+├─ios              ### flutter code를 ios 앱에 맞게 변환
+│  ├─Flutter
+│  ├─Runner
+│  │  ├─Assets.xcassets
+│  │  │  ├─AppIcon.appiconset
+│  │  │  └─LaunchImage.imageset
+│  │  └─Base.lproj
+│  ├─Runner.xcodeproj
+│  │  ├─project.xcworkspace
+│  │  │  └─xcshareddata
+│  │  └─xcshareddata
+│  │      └─xcschemes
+│  └─Runner.xcworkspace
+│      └─xcshareddata
+├─lib                     ### data folder
+└─test                    ### simulation folder
 
+```
 
 ---
 #### 🛠 개발환경 
+
  `Android Studio , flutter, dart, mongoDB`
 ---
 ### [이미지]
